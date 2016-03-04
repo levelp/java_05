@@ -1,0 +1,5 @@
+Исключения
+----------
+
+* RuntimeException
+* Exception 
