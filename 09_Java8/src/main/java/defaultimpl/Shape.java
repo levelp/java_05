@@ -1,8 +1,6 @@
 package defaultimpl;
 
-/**
- * Java8 - реализация по-умолчанию (default для интерфейсов)
- */
+/// Java8: реализация по-умолчанию (default для интерфейсов)
 public interface Shape {
 
     /**

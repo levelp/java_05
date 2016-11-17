@@ -1,5 +1,10 @@
 <!-- doc.py -->
-Объявление своего класса-исключения
+Исключения
+----------
+
+* RuntimeException
+* Exception
+
 ``` java
 public class MyException extends Exception {
     // Могут быть поля-значения
@@ -20,10 +25,6 @@ public class MyException extends Exception {
 [src/main/java/MyException.java](src/main/java/MyException.java)
 
 ....
-...
-throw ex;
-ex.printStackTrace();
 ....
-...
 [src/test/java/Exceptions.java](src/test/java/Exceptions.java)
 

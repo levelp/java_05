@@ -17,11 +17,10 @@ import org.junit.Test;
  */
 public class StringBuilderTest extends Assert {
 
-    /**
-     * Демонстрация работы методов StringBuilder: append, insert, delete
-     */
+    /// Демонстрация работы методов StringBuilder: append, insert, delete
     @Test
     public void testAppendInsertDelete() {
+        //-->
         StringBuilder s = new StringBuilder();
 
         s.append("boolean: ");
@@ -59,5 +58,6 @@ public class StringBuilderTest extends Assert {
         Point point = new Point(2, 3);
         s.append(point);
         assertEquals("boolean: true, double: 1.2  Point{x=2.0, y=3.0}", s.toString());
+        //<--
     }
 }

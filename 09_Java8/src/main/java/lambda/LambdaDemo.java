@@ -2,10 +2,8 @@ package lambda;
 
 import static java.lang.System.out;
 
-/**
- * Лямбда-выражения
- * ----------------
- */
+/// Java8: Лямбда-выражения
+/// -----------------------
 public class LambdaDemo {
 
     public static void main(String[] args) {
@@ -18,6 +16,7 @@ public class LambdaDemo {
             }
         };
          */
+        //-->
         Operation multiply = new Operation() {
             @Override
             public int apply(int a, int b) {
@@ -33,6 +32,7 @@ public class LambdaDemo {
         out.println("Min: " + map(ints, (x, y) -> (x < y) ? x : y));
         out.println("Max (Math::max): " + map(ints, Math::max));
         out.println("Mul2: " + map(ints, LambdaDemo::mul));
+        //<--
     }
 
     private static int mul(int a, int b) {
