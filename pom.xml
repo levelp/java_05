@@ -17,8 +17,6 @@
     </properties>
 
     <modules>
-        <module>01_Exceptions</module>
-        <module>02_StringBuilder</module>
         <module>03_SaveToFile</module>
         <module>04_ProblemFileWriteRead</module>
         <module>SpringMVC</module>

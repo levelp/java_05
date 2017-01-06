@@ -1,0 +1,5 @@
+\beamer@endinputifotherversion {3.36pt}
+\select@language {russian}
+\beamer@sectionintoc {1}{\IeC {\CYRI }\IeC {\cyrs }\IeC {\cyrk }\IeC {\cyrl }\IeC {\cyryu }\IeC {\cyrch }\IeC {\cyre }\IeC {\cyrn }\IeC {\cyri }\IeC {\cyrya } / Exceptions}{2}{0}{1}
+\beamer@sectionintoc {2}{maven}{4}{0}{2}
+\beamer@sectionintoc {3}{Java EE: \IeC {\cyrs }\IeC {\cyro }\IeC {\cyrz }\IeC {\cyrd }\IeC {\cyra }\IeC {\cyrn }\IeC {\cyri }\IeC {\cyre } \IeC {\cyrs }\IeC {\cyra }\IeC {\cyrishrt }\IeC {\cyrt }\IeC {\cyra }}{6}{0}{3}

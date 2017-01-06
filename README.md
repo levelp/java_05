@@ -5,29 +5,14 @@
 [![Build Status](https://travis-ci.org/levelp/java_05.svg?branch=master)](https://travis-ci.org/levelp/java_05)
 [![Coverage Status](https://coveralls.io/repos/github/levelp/java_05/badge.svg?branch=master)](https://coveralls.io/github/levelp/java_05?branch=master)
 
-Операторы и структура кода. Исключения
---------------------------------------
-
-Исключения
-----------
-
-Маленькие хитрости Java. StringBuilder
---------------------------------------
-Тест производительности.
-
-Файловая система. Ввод-вывод
-----------------------------
-File
-Scanner
-
 Начало реализации DAO - хранение в файлах
 -----------------------------------------
 
 Модульное тестирование JUnit 4 - разобрали
 
 
-Работа с PostgreSQL
--------------------
+Базы Данных. Работа с SQL (MySQL / PostgreSQL)
+==============================================
 
 
 SELECT
@@ -64,85 +49,46 @@ CREATE TABLE
 
 ```
 
-Литература
-----------
-* Пакет java.io
-* Потоки выполнения. Синхронизация.
+Файловая система. Ввод-вывод File/Scanner/FileReader
+----------------------------------------------------
 
-Исключения
-----------
+XMLDecoder - из текстового файла считывает XML
+и заполняет поля объектов
+Запись (сериализация) любого объекта в формат XML
+[03_SaveToFile/src/main/java/dao/XMLFile.java](03_SaveToFile/src/main/java/dao/XMLFile.java)
 
-* RuntimeException
-* Exception
+Обновляем
+[03_SaveToFile/src/test/java/FileStorageTest.java](03_SaveToFile/src/test/java/FileStorageTest.java)
 
-``` java
-public class MyException extends Exception {
-    // Могут быть поля-значения
-    final double d;
-    final String name;
-    final int i;
+f1.setFinalField(343);
+Считываем обратно
+[03_SaveToFile/src/test/java/MyClassXMLTest.java](03_SaveToFile/src/test/java/MyClassXMLTest.java)
 
-    // Конструктор
-    public MyException(String name, int i, double d) {
-        super();
-        this.name = name;
-        this.i = i;
-        this.d = d;
-    }
-}
-```
+Запись в текстовый файл
+Чтение из текстового файла
+Считываем элементы массива
+[03_SaveToFile/src/test/java/TextFileSaveLoad.java](03_SaveToFile/src/test/java/TextFileSaveLoad.java)
 
-[01_Exceptions/src/main/java/MyException.java](01_Exceptions/src/main/java/MyException.java)
+TODO: завершить пример
+[03_SaveToFile/src/test/java/UserSaveLoadTest.java](03_SaveToFile/src/test/java/UserSaveLoadTest.java)
 
-....
-....
-[01_Exceptions/src/test/java/Exceptions.java](01_Exceptions/src/test/java/Exceptions.java)
+Используйте: OutputStreamWriter
+Через Reflection API получаем класс
+Через Reflection API получаем список полей
+Получаем значение поля
+Закрываем файл
+Имя класса
+Загружаем класс по имени
+Создаём экземпляр класса
+Pattern hh = Pattern.compile("(\\w+):");
+Пропускаем "="
+[04_ProblemFileWriteRead/src/main/java/ObjectSaveLoad.java](04_ProblemFileWriteRead/src/main/java/ObjectSaveLoad.java)
 
-Демонстрация работы методов StringBuilder: append, insert, delete
-``` java
-        StringBuilder s = new StringBuilder();
-
-        s.append("boolean: ");
-        s.append(true);
-        System.out.println(s);
-        assertEquals("boolean: true", s.toString());
-
-        s.append("  double: ");
-        s.append(1.0);
-        System.out.println(s);
-        assertEquals("boolean: true  double: 1.0", s.toString());
-
-        // Вставляем подстроку в позицию 13
-        s.insert(13, ",");
-        System.out.println(s);
-        assertEquals("boolean: true,  double: 1.0", s.toString());
-
-        // Удаляем кусок
-        s.delete(0, 9);
-        System.out.println(s);
-        assertEquals("true,  double: 1.0", s.toString());
-
-        s = new StringBuilder();
-
-        // Цепочка действий
-        s.append("boolean: ")
-                .append(true)
-                .append(" double: ")
-                .append(1.2)
-                .insert(13, ",");
-        System.out.println(s);
-        assertEquals("boolean: true, double: 1.2", s.toString());
-
-        s.append("  "); // Отступ
-        Point point = new Point(2, 3);
-        s.append(point);
-        assertEquals("boolean: true, double: 1.2  Point{x=2.0, y=3.0}", s.toString());
-```
-
-[02_StringBuilder/src/test/java/StringBuilderTest.java](02_StringBuilder/src/test/java/StringBuilderTest.java)
+Используйте: OutputStreamWriter
+[04_ProblemFileWriteRead/src/main/java/TextSaveLoad.java](04_ProblemFileWriteRead/src/main/java/TextSaveLoad.java)
 
 Внутренние (вложенные) классы Java
-==================================
+----------------------------------
 
 Внутри классов Java можно объявять вложенные (внутренние классы).
 
@@ -150,8 +96,35 @@ public class MyException extends Exception {
 * Статический внутренний класс (с ключевым словом static)
 * Внутренние классы - объявляются внутри основного класса (без слова static)
 * Анонимные (безымянные) классы - объявляются внутри методов основного класса
+Константа в локальном классе
+static int staticVar = 100; // Ошибка компиляции
+Не можем менять локальных переменных
+value++;
+notFinal++; // Ошибка компиляции
+Эта строка синтаксически корректна
+Можно создавать сколько угодно экземпляров локального класса
+но только внутри данного метода
+При определении анонимного класса применен полиморфизм - переменная listener
+содержит экземпляр анонимного класса, реализующего существующий
+интерфейс ActionListener
+Начало анонимного локального класса >>>
+<< Окончание
+Не можем обращаться к обычным полям класса
+int getOuterField() {
+return OuterClass.this.outerField; // Эта строка кода - ошибка компиляции
+}
+LocalInnerClass inner; // Ошибка компиляции: локальные классы тут не видны
+static void xx(){ // Ошибка
+}
 [05_JavaInnerClasses/src/main/java/OuterClass.java](05_JavaInnerClasses/src/main/java/OuterClass.java)
 
+Помещаем новый элемент на вершину
+Запоминаем значение
+Переводим вершину стека на следующий элемент
+Возвращаем значение
+[05_JavaInnerClasses/src/main/java/Stack.java](05_JavaInnerClasses/src/main/java/Stack.java)
+
+Анонимный класс
 ``` java
         MyInterface myInterface = new MyInterface() {
             @Override
@@ -191,6 +164,22 @@ Java8: Лямбда-выражения
 ```
 
 [09_Java8/src/main/java/lambda/LambdaDemo.java](09_Java8/src/main/java/lambda/LambdaDemo.java)
+
+Ищем куда поставить новый элемент
+Мы идём налево если новый элемент меньше текущего
+Иначе (новый элемент => текущему) идём направо
+[09_Java8/src/main/java/lambda_tree/SearchTree.java](09_Java8/src/main/java/lambda_tree/SearchTree.java)
+
+2
+/   \
+1    5
+[09_Java8/src/test/java/lambda_tree/SearchTreeTest.java](09_Java8/src/test/java/lambda_tree/SearchTreeTest.java)
+
+Соединение с БД
+Создаём SQL-оператор
+Создаем таблицу
+Получаем результаты
+[JDBC_Demo/src/test/java/jdbcdemo/JDBCDemo.java](JDBC_Demo/src/test/java/jdbcdemo/JDBCDemo.java)
 
 ``` java
 @Controller
@@ -294,9 +283,36 @@ public class HelloController {
 
 [SpringMVC/src/main/java/ru/levelp/mvc/controller/HelloController.java](SpringMVC/src/main/java/ru/levelp/mvc/controller/HelloController.java)
 
+resume.setName("Нужное нам резюме: " + query);
+[SpringMVC/src/main/java/ru/levelp/mvc/controller/ResumeController.java](SpringMVC/src/main/java/ru/levelp/mvc/controller/ResumeController.java)
+
+Сравнение с игнорированием
+[SpringMVC/src/main/java/ru/levelp/mvc/storage/FileStorage.java](SpringMVC/src/main/java/ru/levelp/mvc/storage/FileStorage.java)
+
+Создаём запрос
+Набор результатов
+Пока есть результаты
+class Contact {
+int id;
+String name;
+String surname;
+}
+query.executeUpdate("UPDATE contact SET ... WHERE ...");
+query.executeUpdate("DELETE FROM contact WHERE ...");
+query.executeUpdate("INSERT INTO contact VALUES(...)")
+query.execute("CREATE TABLE ...");
+[SpringMVC/src/test/java/jdbc/PostgresJDBC.java](SpringMVC/src/test/java/jdbc/PostgresJDBC.java)
+
+@Test
+public void
+[SpringMVC/src/test/java/ru/levelp/mvc/UserTest.java](SpringMVC/src/test/java/ru/levelp/mvc/UserTest.java)
+
+
 Домашнее задание
 ================
 
+Создание JSP-страниц, HTML, CSS, JavaScript
+-------------------------------------------
 Проект: https://github.com/levelp/WebInterface
 
 Сделать вывод всех сообщений об ошибках.
@@ -304,5 +320,4 @@ public class HelloController {
 HTML.
 
 http://htmlbook.ru - справочник по HTML.
-
 
